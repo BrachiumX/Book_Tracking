@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-@RequestMapping(path="/api")
-public class MainController {
+@RequestMapping(path="/data")
+public class DatabaseController {
   @Autowired
   private BookRepository bookRepository;
 
