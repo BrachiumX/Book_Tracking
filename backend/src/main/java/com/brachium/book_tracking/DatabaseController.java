@@ -15,9 +15,9 @@ public class DatabaseController {
       , @RequestParam String isbn, @RequestParam int pageCount, @RequestParam String language
       , @RequestParam String author, @RequestParam String description, @RequestParam int year) {
 
-    isbn = isbn.replaceAll("-","");
+    String cleanIsbn = isbn.replaceAll("-","");
 
-    if(getByIsbn(isbn).iterator().hasNext()) {
+    if(getByIsbn(cleanIsbn).iterator().hasNext()) {
       return "A book with this ISBN already exists";
     }
 
@@ -29,7 +29,7 @@ public class DatabaseController {
       return "Page Count must be non-negative";
     }
     
-    Book book = new Book(name, isbn, pageCount, language, author, description, year);
+    Book book = new Book(name, cleanIsbn, pageCount, language, author, description, year);
 
     bookRepository.save(book);
 
