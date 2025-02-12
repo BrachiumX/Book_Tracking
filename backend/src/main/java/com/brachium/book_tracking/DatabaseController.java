@@ -8,33 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path="/data")
 public class DatabaseController {
   @Autowired
-  private BookRepository bookRepository;
-
-  @PostMapping(path="/add")
-  public @ResponseBody String addNewBook (@RequestParam String name
-      , @RequestParam String isbn, @RequestParam int pageCount, @RequestParam String language
-      , @RequestParam String author, @RequestParam String description, @RequestParam int year) {
-
-    String cleanIsbn = isbn.replaceAll("-","");
-
-    if(getByIsbn(cleanIsbn).iterator().hasNext()) {
-      return "A book with this ISBN already exists";
-    }
-
-    if(!language.equals("eng") && !language.equals("tr") && !language.equals("ger")) {
-      return "This language is not supported";
-    }
-
-    if(pageCount < 0) {
-      return "Page Count must be non-negative";
-    }
-    
-    Book book = new Book(name, cleanIsbn, pageCount, language, author, description, year);
-
-    bookRepository.save(book);
-
-    return "Saved";
-  }
+  protected BookRepository bookRepository;
 
   @GetMapping(path="/all")
   public @ResponseBody Iterable<Book> getAllBooks() {
@@ -101,16 +75,48 @@ public class DatabaseController {
     return bookRepository.findByAuthor(author);
   }
 
-  //Functions only for testing debugging
-  @DeleteMapping(path="/reset")
-  private @ResponseBody String resetDatabase() {
-    bookRepository.deleteAll();
-    return "Database reset";
-  }
+  //Controller for testing purposes
+  //This shouldn't be exposed to the outside
+  @Controller
+  @RequestMapping(path="/test")
+  private class TestController {
 
-  @DeleteMapping(path="/delete")
-  private @ResponseBody String deleteById(int id) {
-    bookRepository.deleteById(id);
-    return "Entry deleted";
+    @PostMapping(path="/add")
+    private @ResponseBody String addNewBook (@RequestParam String name
+            , @RequestParam String isbn, @RequestParam int pageCount, @RequestParam String language
+            , @RequestParam String author, @RequestParam String description, @RequestParam int year) {
+
+      String cleanIsbn = isbn.replaceAll("-","");
+
+      if(getByIsbn(cleanIsbn).iterator().hasNext()) {
+        return "A book with this ISBN already exists";
+      }
+
+      if(!language.equals("eng") && !language.equals("tr") && !language.equals("ger")) {
+        return "This language is not supported";
+      }
+
+      if(pageCount < 0) {
+        return "Page Count must be non-negative";
+      }
+
+      Book book = new Book(name, cleanIsbn, pageCount, language, author, description, year);
+
+      bookRepository.save(book);
+
+      return "Saved";
+    }
+
+    @DeleteMapping(path="/reset")
+    private @ResponseBody String resetDatabase() {
+      bookRepository.deleteAll();
+      return "Database reset";
+    }
+
+    @DeleteMapping(path="/delete")
+    private @ResponseBody String deleteById(int id) {
+      bookRepository.deleteById(id);
+      return "Entry deleted";
+    }
   }
 }
