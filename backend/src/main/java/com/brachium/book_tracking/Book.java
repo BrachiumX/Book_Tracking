@@ -23,8 +23,7 @@ public class Book {
 
   public Book() {}
 
-  public Book(Integer id, String name, String isbn10, String isbn13, String otherIdent, int pageCount, String language, String author, String description, int year) {
-    this.id = id;
+  public Book(String name, String isbn10, String isbn13, String otherIdent, int pageCount, String language, String author, String description, int year) {
     this.name = name;
     this.isbn10 = isbn10;
     this.isbn13 = isbn13;
