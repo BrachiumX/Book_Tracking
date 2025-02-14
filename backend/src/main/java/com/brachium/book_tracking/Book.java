@@ -1,9 +1,6 @@
 package com.brachium.book_tracking;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Book {
@@ -12,27 +9,61 @@ public class Book {
   private Integer id;
 
   private String name;
+
   private String isbn10;
   private String isbn13;
-  private String otherIdent;
+  private String oclc;
+  private String lccn;
+
+  private String googleId;
+
   private int pageCount;
   private String language;
   private String author;
+
+  @Column(name = "description", columnDefinition = "LONGTEXT")
   private String description;
+
   private int year;
 
   public Book() {}
 
-  public Book(String name, String isbn10, String isbn13, String otherIdent, int pageCount, String language, String author, String description, int year) {
+  public Book(String name, String isbn10, String isbn13, String oclc, String lccn, String googleId, int pageCount, String language, String author, String description, int year) {
     this.name = name;
     this.isbn10 = isbn10;
     this.isbn13 = isbn13;
-    this.otherIdent = otherIdent;
+    this.oclc = oclc;
+    this.lccn = lccn;
+    this.googleId = googleId;
     this.pageCount = pageCount;
     this.language = language;
     this.author = author;
     this.description = description;
     this.year = year;
+  }
+
+  public String getGoogleId() {
+    return googleId;
+  }
+
+  public void setGoogleId(String googleId) {
+    this.googleId = googleId;
+  }
+
+  public String getOclc() {
+    return oclc;
+  }
+
+  public void setOclc(String oclc) {
+    this.oclc = oclc;
+  }
+
+  public String getLccn() {
+    return lccn;
+  }
+
+  public void setLccn(String lccn) {
+    this.lccn = lccn;
   }
 
   public Integer getId() {
@@ -97,14 +128,6 @@ public class Book {
 
   public void setIsbn10(String isbn10) {
     this.isbn10 = isbn10;
-  }
-
-  public String getOtherIdent() {
-    return otherIdent;
-  }
-
-  public void setOtherIdent(String otherIdent) {
-    this.otherIdent = otherIdent;
   }
 
   public String getIsbn13() {

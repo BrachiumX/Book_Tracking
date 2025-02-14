@@ -35,9 +35,19 @@ public class DatabaseController {
     return bookRepository.findByIsbn13(isbn13);
   }
 
-  @GetMapping(path="/otherIdent/{otherIdent}")
-  public @ResponseBody Iterable<Book> getByOtherIdent(@PathVariable String otherIdent) {
-    return bookRepository.findByOtherIdent(otherIdent);
+  @GetMapping(path="/lccn/{lccn}")
+  public @ResponseBody Iterable<Book> getByLccn(@PathVariable String lccn) {
+    return bookRepository.findByLccn(lccn);
+  }
+
+  @GetMapping(path="/oclc/{oclc}")
+  public @ResponseBody Iterable<Book> getByOclc(@PathVariable String oclc) {
+    return bookRepository.findByOclc(oclc);
+  }
+
+  @GetMapping(path="/googleId/{googleId}")
+  public @ResponseBody Iterable<Book> getByGoogleId(@PathVariable String googleId) {
+    return bookRepository.findByGoogleId(googleId);
   }
 
   @GetMapping(path="/page/intv")
