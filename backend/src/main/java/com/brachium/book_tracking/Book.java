@@ -12,7 +12,9 @@ public class Book {
   private Integer id;
 
   private String name;
-  private String isbn;
+  private String isbn10;
+  private String isbn13;
+  private String otherIdent;
   private int pageCount;
   private String language;
   private String author;
@@ -21,9 +23,12 @@ public class Book {
 
   public Book() {}
 
-  public Book(String name, String isbn, int pageCount, String language, String author, String description, int year) {
+  public Book(Integer id, String name, String isbn10, String isbn13, String otherIdent, int pageCount, String language, String author, String description, int year) {
+    this.id = id;
     this.name = name;
-    this.isbn = isbn;
+    this.isbn10 = isbn10;
+    this.isbn13 = isbn13;
+    this.otherIdent = otherIdent;
     this.pageCount = pageCount;
     this.language = language;
     this.author = author;
@@ -45,14 +50,6 @@ public class Book {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public String getIsbn() {
-    return isbn;
-  }
-
-  public void setIsbn(String isbn) {
-    this.isbn = isbn;
   }
 
   public int getPageCount() {
@@ -93,5 +90,29 @@ public class Book {
 
   public void setYear(int year) {
     this.year = year;
+  }
+
+  public String getIsbn10() {
+    return isbn10;
+  }
+
+  public void setIsbn10(String isbn10) {
+    this.isbn10 = isbn10;
+  }
+
+  public String getOtherIdent() {
+    return otherIdent;
+  }
+
+  public void setOtherIdent(String otherIdent) {
+    this.otherIdent = otherIdent;
+  }
+
+  public String getIsbn13() {
+    return isbn13;
+  }
+
+  public void setIsbn13(String isbn13) {
+    this.isbn13 = isbn13;
   }
 }

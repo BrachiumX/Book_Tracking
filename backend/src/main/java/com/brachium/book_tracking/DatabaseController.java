@@ -25,9 +25,19 @@ public class DatabaseController {
     return bookRepository.findByName(name);
   }
 
-  @GetMapping(path="/isbn/{isbn}")
-  public @ResponseBody Iterable<Book> getByIsbn(@PathVariable String isbn) {
-    return bookRepository.findByIsbn(isbn);
+  @GetMapping(path="/isbn10/{isbn10}")
+  public @ResponseBody Iterable<Book> getByIsbn10(@PathVariable String isbn10) {
+    return bookRepository.findByIsbn10(isbn10);
+  }
+
+  @GetMapping(path="/isbn13/{isbn13}")
+  public @ResponseBody Iterable<Book> getByIsbn13(@PathVariable String isbn13) {
+    return bookRepository.findByIsbn13(isbn13);
+  }
+
+  @GetMapping(path="/otherIdent/{otherIdent}")
+  public @ResponseBody Iterable<Book> getByOtherIdent(@PathVariable String otherIdent) {
+    return bookRepository.findByOtherIdent(otherIdent);
   }
 
   @GetMapping(path="/page/intv")
@@ -80,32 +90,6 @@ public class DatabaseController {
   @Controller
   @RequestMapping(path="/test")
   private class TestController {
-
-    @PostMapping(path="/add")
-    private @ResponseBody String addNewBook (@RequestParam String name
-            , @RequestParam String isbn, @RequestParam int pageCount, @RequestParam String language
-            , @RequestParam String author, @RequestParam String description, @RequestParam int year) {
-
-      String cleanIsbn = isbn.replaceAll("-","");
-
-      if(getByIsbn(cleanIsbn).iterator().hasNext()) {
-        return "A book with this ISBN already exists";
-      }
-
-      if(!language.equals("eng") && !language.equals("tr") && !language.equals("ger")) {
-        return "This language is not supported";
-      }
-
-      if(pageCount < 0) {
-        return "Page Count must be non-negative";
-      }
-
-      Book book = new Book(name, cleanIsbn, pageCount, language, author, description, year);
-
-      bookRepository.save(book);
-
-      return "Saved";
-    }
 
     @DeleteMapping(path="/reset")
     private @ResponseBody String resetDatabase() {
