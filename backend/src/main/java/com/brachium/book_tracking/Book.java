@@ -1,140 +1,150 @@
 package com.brachium.book_tracking;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-@Entity // This tells Hibernate to make a table out of this class
+import java.util.LinkedList;
+
+@Entity
 public class Book {
-  @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
-  private Integer id;
 
-  private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-  private String isbn10;
-  private String isbn13;
-  private String oclc;
-  private String lccn;
+    private String googleId;
+    private String title;
+    private String author;
+    private int publishedYear;
+    private String publisher;
+    private String description;
+    private String isbn13;
+    private String isbn10;
+    private int pageCount;
+    private String category;
+    private String imageLink;
+    private String language;
 
-  private String googleId;
+    public Book() {}
 
-  private int pageCount;
-  private String language;
-  private String author;
+    public Book(String googleId, String title, String author, int publishedYear, String publisher, String description, String isbn13, String isbn10, int pageCount, String category, String imageLink, String language) {
+        this.googleId = googleId;
+        this.title = title;
+        this.author = author;
+        this.publishedYear = publishedYear;
+        this.publisher = publisher;
+        this.description = description;
+        this.isbn13 = isbn13;
+        this.isbn10 = isbn10;
+        this.pageCount = pageCount;
+        this.category = category;
+        this.imageLink = imageLink;
+        this.language = language;
+    }
 
-  @Column(name = "description", columnDefinition = "LONGTEXT")
-  private String description;
+    public int getId() {
+        return id;
+    }
 
-  private int year;
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public Book() {}
+    public String getGoogleId() {
+        return googleId;
+    }
 
-  public Book(String name, String isbn10, String isbn13, String oclc, String lccn, String googleId, int pageCount, String language, String author, String description, int year) {
-    this.name = name;
-    this.isbn10 = isbn10;
-    this.isbn13 = isbn13;
-    this.oclc = oclc;
-    this.lccn = lccn;
-    this.googleId = googleId;
-    this.pageCount = pageCount;
-    this.language = language;
-    this.author = author;
-    this.description = description;
-    this.year = year;
-  }
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
+    }
 
-  public String getGoogleId() {
-    return googleId;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public void setGoogleId(String googleId) {
-    this.googleId = googleId;
-  }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-  public String getOclc() {
-    return oclc;
-  }
+    public String getAuthor() {
+        return author;
+    }
 
-  public void setOclc(String oclc) {
-    this.oclc = oclc;
-  }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-  public String getLccn() {
-    return lccn;
-  }
+    public int getPublishedYear() {
+        return publishedYear;
+    }
 
-  public void setLccn(String lccn) {
-    this.lccn = lccn;
-  }
+    public void setPublishedYear(int publishedYear) {
+        this.publishedYear = publishedYear;
+    }
 
-  public Integer getId() {
-    return id;
-  }
+    public String getPublisher() {
+        return publisher;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-  public int getPageCount() {
-    return pageCount;
-  }
+    public String getIsbn13() {
+        return isbn13;
+    }
 
-  public void setPageCount(int pageCount) {
-    this.pageCount = pageCount;
-  }
+    public void setIsbn13(String isbn13) {
+        this.isbn13 = isbn13;
+    }
 
-  public String getLanguage() {
-    return language;
-  }
+    public String getIsbn10() {
+        return isbn10;
+    }
 
-  public void setLanguage(String language) {
-    this.language = language;
-  }
+    public void setIsbn10(String isbn10) {
+        this.isbn10 = isbn10;
+    }
 
-  public String getAuthor() {
-    return author;
-  }
+    public int getPageCount() {
+        return pageCount;
+    }
 
-  public void setAuthor(String author) {
-    this.author = author;
-  }
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public String getCategory() {
+        return category;
+    }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
-  public int getYear() {
-    return year;
-  }
+    public String getImageLink() {
+        return imageLink;
+    }
 
-  public void setYear(int year) {
-    this.year = year;
-  }
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
 
-  public String getIsbn10() {
-    return isbn10;
-  }
+    public String getLanguage() {
+        return language;
+    }
 
-  public void setIsbn10(String isbn10) {
-    this.isbn10 = isbn10;
-  }
-
-  public String getIsbn13() {
-    return isbn13;
-  }
-
-  public void setIsbn13(String isbn13) {
-    this.isbn13 = isbn13;
-  }
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 }

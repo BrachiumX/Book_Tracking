@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 public class BookTrackingApplication {
 
-	@Autowired
-	private BookRepository bookRepository;
+	//@Autowired
+	//private BookRepository bookRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookTrackingApplication.class, args);

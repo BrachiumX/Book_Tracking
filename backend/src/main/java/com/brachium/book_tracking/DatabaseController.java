@@ -22,7 +22,7 @@ public class DatabaseController {
 
   @GetMapping(path="/name/{name}")
   public @ResponseBody Iterable<Book> getByName(@PathVariable String name) {
-    return bookRepository.findByName(name);
+    return bookRepository.findByTitle(name);
   }
 
   @GetMapping(path="/isbn10/{isbn10}")
@@ -33,16 +33,6 @@ public class DatabaseController {
   @GetMapping(path="/isbn13/{isbn13}")
   public @ResponseBody Iterable<Book> getByIsbn13(@PathVariable String isbn13) {
     return bookRepository.findByIsbn13(isbn13);
-  }
-
-  @GetMapping(path="/lccn/{lccn}")
-  public @ResponseBody Iterable<Book> getByLccn(@PathVariable String lccn) {
-    return bookRepository.findByLccn(lccn);
-  }
-
-  @GetMapping(path="/oclc/{oclc}")
-  public @ResponseBody Iterable<Book> getByOclc(@PathVariable String oclc) {
-    return bookRepository.findByOclc(oclc);
   }
 
   @GetMapping(path="/googleId/{googleId}")
@@ -72,22 +62,22 @@ public class DatabaseController {
 
   @GetMapping(path="/year/intv")
   public @ResponseBody Iterable<Book> getYearInterval(@RequestParam int lowerLimit, @RequestParam int upperLimit) {
-    return bookRepository.findByYearBetween(lowerLimit, upperLimit);
+    return bookRepository.findByPublishedYearBetween(lowerLimit, upperLimit);
   }
 
   @GetMapping(path="/year/gre")
   public @ResponseBody Iterable<Book> getYearGreaterThan(@RequestParam int lowerLimit) {
-    return bookRepository.findByYearBetween(lowerLimit, Integer.MAX_VALUE);
+    return bookRepository.findByPublishedYearBetween(lowerLimit, Integer.MAX_VALUE);
   }
 
   @GetMapping(path="/year/les")
   public @ResponseBody Iterable<Book> getYearLessThan(@RequestParam int upperLimit) {
-    return bookRepository.findByYearBetween(0, upperLimit);
+    return bookRepository.findByPublishedYearBetween(0, upperLimit);
   }
 
   @GetMapping(path="/year/exact")
   public @ResponseBody Iterable<Book> getYearExact(@RequestParam int year) {
-    return bookRepository.findByYearBetween(year, year);
+    return bookRepository.findByPublishedYearBetween(year, year);
   }
 
   @GetMapping(path="/author")

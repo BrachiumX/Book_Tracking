@@ -5,14 +5,12 @@ import org.springframework.data.repository.CrudRepository;
 public interface BookRepository extends CrudRepository<Book, Integer> {
 
     Iterable<Book> findByLanguage(String language);
-    Iterable<Book> findByName(String name);
+    Iterable<Book> findByTitle(String name);
     Iterable<Book> findByIsbn10(String isbn10);
     Iterable<Book> findByIsbn13(String isbn13);
-    Iterable<Book> findByLccn(String lccn);
-    Iterable<Book> findByOclc(String oclc);
     Iterable<Book> findByGoogleId(String googleId);
     Iterable<Book> findByAuthor(String author);
     Iterable<Book> findByPageCountBetween(int upperLimit, int lowerLimit);
-    Iterable<Book> findByYearBetween(int upperLimit, int lowerLimit);
+    Iterable<Book> findByPublishedYearBetween(int upperLimit, int lowerLimit);
     void deleteById(int id);
 }
