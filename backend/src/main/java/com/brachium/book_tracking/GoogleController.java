@@ -1,25 +1,25 @@
 package com.brachium.book_tracking;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="/google")
 public class GoogleController {
 
-    final int sizeLimit = 100;
+    final int sizeLimit = 40;
 
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private GoogleInteraction googleInteraction;
+
     @PostMapping
     public @ResponseBody String selectBookFromGoogle(@RequestParam String googleId) {
-        Book selectedBook = GoogleInteraction.searchByGoogleId(googleId);
+        Book selectedBook = googleInteraction.searchByGoogleId(googleId);
         try {
             bookRepository.save(selectedBook);
-        } catch (DataIntegrityViolationException e) {
-            return "Error: A book with this id or isbn already exists.";
         }
         catch (Exception e) {
             return "Error " + e;
@@ -34,10 +34,8 @@ public class GoogleController {
                                                         @RequestParam(defaultValue = "") String titleParameter,
                                                         @RequestParam(defaultValue = "") String authorParameter,
                                                         @RequestParam(defaultValue = "") String isbn,
-                                                        @RequestParam(defaultValue = "20") int pageSize,
+                                                        @RequestParam(defaultValue = "10") int pageSize,
                                                         @RequestParam(defaultValue = "0") int currentPage) throws InterruptedException {
-        return GoogleInteraction.makeGoogleApiRequest(query, titleParameter, authorParameter, isbn, Math.min(pageSize, sizeLimit) , currentPage);
+        return googleInteraction.makeGoogleApiRequest(query, titleParameter, authorParameter, isbn, Math.min(pageSize, sizeLimit) , currentPage);
     }
-
-
 }

@@ -1,10 +1,12 @@
 package com.brachium.book_tracking;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import java.util.LinkedList;
 import java.util.List;
 
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GoogleBookList {
 
@@ -12,59 +14,13 @@ public class GoogleBookList {
     private String kind;
     private LinkedList<GoogleBook> items;
 
-    public int getTotalItems() {
-        return totalItems;
-    }
-
-    public void setTotalItems(int totalItems) {
-        this.totalItems = totalItems;
-    }
-
-    public String getKind() {
-        return kind;
-    }
-
-    public void setKind(String kind) {
-        this.kind = kind;
-    }
-
-    public LinkedList<GoogleBook> getItems() {
-        return items;
-    }
-
-    public void setItems(LinkedList<GoogleBook> items) {
-        this.items = items;
-    }
-
+    @Data
     public static class GoogleBook {
         private String kind;
         private String id;
         private VolumeInfo volumeInfo;
 
-        public String getKind() {
-            return kind;
-        }
-
-        public void setKind(String kind) {
-            this.kind = kind;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public VolumeInfo getVolumeInfo() {
-            return volumeInfo;
-        }
-
-        public void setVolumeInfo(VolumeInfo volumeInfo) {
-            this.volumeInfo = volumeInfo;
-        }
-
+        @Data
         public static class VolumeInfo {
             private String title;
             private LinkedList<String> authors;
@@ -77,126 +33,16 @@ public class GoogleBookList {
             private ImageLinks imageLinks;
             private String language;
 
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public LinkedList<String> getAuthors() {
-                return authors;
-            }
-
-            public void setAuthors(LinkedList<String> authors) {
-                this.authors = authors;
-            }
-
-            public String getPublisher() {
-                return publisher;
-            }
-
-            public void setPublisher(String publisher) {
-                this.publisher = publisher;
-            }
-
-            public String getDescription() {
-                return description;
-            }
-
-            public void setDescription(String description) {
-                this.description = description;
-            }
-
-            public LinkedList<IndustryIdentifier> getIndustryIdentifiers() {
-                return industryIdentifiers;
-            }
-
-            public void setIndustryIdentifiers(LinkedList<IndustryIdentifier> industryIdentifiers) {
-                this.industryIdentifiers = industryIdentifiers;
-            }
-
-            public int getPageCount() {
-                return pageCount;
-            }
-
-            public void setPageCount(int pageCount) {
-                this.pageCount = pageCount;
-            }
-
-            public LinkedList<String> getCategories() {
-                return categories;
-            }
-
-            public void setCategories(LinkedList<String> categories) {
-                this.categories = categories;
-            }
-
-            public String getLanguage() {
-                return language;
-            }
-
-            public void setLanguage(String language) {
-                this.language = language;
-            }
-
-            public String getPublishedDate() {
-                return publishedDate;
-            }
-
-            public void setPublishedDate(String publishedDate) {
-                this.publishedDate = publishedDate;
-            }
-
-            public ImageLinks getImageLinks() {
-                return imageLinks;
-            }
-
-            public void setImageLinks(ImageLinks imageLinks) {
-                this.imageLinks = imageLinks;
-            }
-
+            @Data
             public static class IndustryIdentifier {
                 private String type;
                 private String identifier;
-
-                public String getType() {
-                    return type;
-                }
-
-                public void setType(String type) {
-                    this.type = type;
-                }
-
-                public String getIdentifier() {
-                    return identifier;
-                }
-
-                public void setIdentifier(String identifier) {
-                    this.identifier = identifier;
-                }
             }
 
+            @Data
             public static class ImageLinks {
                 private String smallThumbnail;
                 private String thumbnail;
-
-                public String getSmallThumbnail() {
-                    return smallThumbnail;
-                }
-
-                public void setSmallThumbnail(String smallThumbnail) {
-                    this.smallThumbnail = smallThumbnail;
-                }
-
-                public String getThumbnail() {
-                    return thumbnail;
-                }
-
-                public void setThumbnail(String thumbnail) {
-                    this.thumbnail = thumbnail;
-                }
             }
         }
 
@@ -238,7 +84,8 @@ public class GoogleBookList {
                 publishedYear = Integer.parseInt(this.volumeInfo.publishedDate.split("-")[0]);
             }
 
-            return new Book(this.id,
+            return new Book(0,
+                    this.id,
                     this.volumeInfo.title,
                     author,
                     publishedYear,

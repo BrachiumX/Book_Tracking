@@ -1,30 +1,39 @@
 package com.brachium.book_tracking;
 
-import org.springframework.web.client.RestTemplate;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
-
+@AllArgsConstructor
+@Component
 public class GoogleInteraction {
 
-    public static Book searchByGoogleId(String googleId) {
+    RestClient restClient;
+
+    public Book searchByGoogleId(String googleId) {
         String url = "https://www.googleapis.com/books/v1/volumes/" + googleId;
-        RestTemplate restTemplate = new RestTemplate();
-        GoogleBookList.GoogleBook googleBook = restTemplate.getForObject(url, GoogleBookList.GoogleBook.class);
+        GoogleBookList.GoogleBook googleBook;
+        try {
+            googleBook = restClient.get().uri(url).retrieve().body(GoogleBookList.GoogleBook.class);
+        } catch (Exception e) {
+            return null;
+        }
         if (googleBook == null) {
             return null;
         }
         return googleBook.convertToBook();
     }
 
-    public static List<Book> makeGoogleApiRequest(String query, String titleParameter, String authorParameter, String isbn, int pageSize, int currentPage) {
+    public List<Book> makeGoogleApiRequest(String query, String titleParameter, String authorParameter, String isbn, int pageSize, int currentPage) {
         if (query.isEmpty() && isbn.isEmpty() && titleParameter.isEmpty() && authorParameter.isEmpty()) {
             return null;
         }
 
         String uri = query;
 
-        if(!isbn.isEmpty()) {
+        if (!isbn.isEmpty()) {
             uri += "isbn:" + isbn + "+";
         }
         if (!titleParameter.isEmpty()) {
@@ -34,12 +43,14 @@ public class GoogleInteraction {
             uri += "inauthor:" + authorParameter + "+";
         }
 
-        String url = "https://www.googleapis.com/books/v1/volumes?q=" + uri + "&maxResults=" + pageSize + "&startIndex=";
-
         int currIndex = currentPage * pageSize;
-        RestTemplate restTemplate = new RestTemplate();
-        GoogleBookList googleBookList = restTemplate.getForObject(url + currIndex, GoogleBookList.class);
-
+        String url = "https://www.googleapis.com/books/v1/volumes?q=" + uri + "&maxResults=" + pageSize + "&startIndex=" + currIndex;
+        GoogleBookList googleBookList;
+        try {
+            googleBookList = restClient.get().uri(url).retrieve().body(GoogleBookList.class);
+        } catch (Exception e) {
+            return null;
+        }
         if (googleBookList == null) {
             return null;
         }

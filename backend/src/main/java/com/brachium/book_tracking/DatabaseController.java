@@ -1,13 +1,14 @@
 package com.brachium.book_tracking;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping(path="/data")
 public class DatabaseController {
-  @Autowired
+
   protected BookRepository bookRepository;
 
   @GetMapping(path="/all")
