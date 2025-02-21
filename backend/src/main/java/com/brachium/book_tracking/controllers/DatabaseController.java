@@ -1,5 +1,7 @@
-package com.brachium.book_tracking;
+package com.brachium.book_tracking.controllers;
 
+import com.brachium.book_tracking.book.Book;
+import com.brachium.book_tracking.book.BookRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

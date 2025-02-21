@@ -1,5 +1,6 @@
-package com.brachium.book_tracking;
+package com.brachium.book_tracking.google;
 
+import com.brachium.book_tracking.book.Book;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 

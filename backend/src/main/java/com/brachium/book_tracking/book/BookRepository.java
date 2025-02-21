@@ -1,4 +1,4 @@
-package com.brachium.book_tracking;
+package com.brachium.book_tracking.book;
 
 import org.springframework.data.repository.CrudRepository;
 

@@ -1,18 +1,19 @@
-package com.brachium.book_tracking;
+package com.brachium.book_tracking.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.brachium.book_tracking.google.GoogleInteraction;
+import com.brachium.book_tracking.book.Book;
+import com.brachium.book_tracking.book.BookRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(path="/google")
 public class GoogleController {
 
     final int sizeLimit = 40;
 
-    @Autowired
     private BookRepository bookRepository;
-
-    @Autowired
     private GoogleInteraction googleInteraction;
 
     @PostMapping
@@ -26,8 +27,6 @@ public class GoogleController {
         }
         return "Saved " + selectedBook.getId();
     }
-
-
 
     @GetMapping
     public @ResponseBody Iterable<Book> searchGoogleApi(@RequestParam(defaultValue = "") String query,

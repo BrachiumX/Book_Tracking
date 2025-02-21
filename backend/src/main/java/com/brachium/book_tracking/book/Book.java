@@ -1,4 +1,4 @@
-package com.brachium.book_tracking;
+package com.brachium.book_tracking.book;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,6 @@ import lombok.Data;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(unique = true)

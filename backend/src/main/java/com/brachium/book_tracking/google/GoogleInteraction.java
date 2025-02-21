@@ -1,5 +1,6 @@
-package com.brachium.book_tracking;
+package com.brachium.book_tracking.google;
 
+import com.brachium.book_tracking.book.Book;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -54,7 +55,6 @@ public class GoogleInteraction {
         if (googleBookList == null) {
             return null;
         }
-
         return googleBookList.convertList();
     }
 }
