@@ -1,9 +1,6 @@
 package com.brachium.book_tracking;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.LinkedList;
 
@@ -14,13 +11,17 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(unique = true)
     private String googleId;
     private String title;
     private String author;
     private int publishedYear;
     private String publisher;
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
+    @Column(unique = true)
     private String isbn13;
+    @Column(unique = true)
     private String isbn10;
     private int pageCount;
     private String category;

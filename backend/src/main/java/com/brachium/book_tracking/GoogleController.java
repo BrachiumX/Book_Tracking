@@ -22,11 +22,12 @@ public class GoogleController {
     @PostMapping
     public @ResponseBody String selectBookFromGoogle(@RequestParam String googleId) throws IOException {
         Book selectedBook = searchByGoogleId(googleId);
-        if (selectedBook == null) {
+        try {
+            bookRepository.save(selectedBook);
+        } catch (Exception e) {
             return "Error";
         }
-        bookRepository.save(selectedBook);
-        return "Saved";
+        return "Saved " + selectedBook.getId();
     }
 
     public Book searchByGoogleId(String googleId) throws IOException {
