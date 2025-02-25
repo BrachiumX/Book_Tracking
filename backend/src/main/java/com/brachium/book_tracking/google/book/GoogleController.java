@@ -1,6 +1,5 @@
-package com.brachium.book_tracking.controllers;
+package com.brachium.book_tracking.google.book;
 
-import com.brachium.book_tracking.google.book.GoogleInteraction;
 import com.brachium.book_tracking.book.Book;
 import com.brachium.book_tracking.book.BookRepository;
 import lombok.AllArgsConstructor;

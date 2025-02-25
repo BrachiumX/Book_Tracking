@@ -13,4 +13,5 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
     Iterable<Book> findByPageCountBetween(int upperLimit, int lowerLimit);
     Iterable<Book> findByPublishedYearBetween(int upperLimit, int lowerLimit);
     void deleteById(int id);
+    Book findById (int id);
 }

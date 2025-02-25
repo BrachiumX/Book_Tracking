@@ -1,4 +1,4 @@
-package com.brachium.book_tracking.main;
+package com.brachium.book_tracking;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

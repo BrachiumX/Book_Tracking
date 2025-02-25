@@ -1,4 +1,4 @@
-package com.brachium.book_tracking.google;
+package com.brachium.book_tracking.google.book;
 
 import com.brachium.book_tracking.book.Book;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -47,7 +47,7 @@ public class GoogleBookList {
             }
         }
 
-        Book convertToBook() {
+        public Book convertToBook() {
             if (this.volumeInfo == null) {
                 return null;
             }
@@ -101,7 +101,7 @@ public class GoogleBookList {
         }
     }
 
-    List<Book> convertList() {
+    public List<Book> convertList() {
         if (this.items == null) {
             return new LinkedList<>();
         }

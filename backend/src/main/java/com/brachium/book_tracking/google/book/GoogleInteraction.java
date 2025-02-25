@@ -1,4 +1,4 @@
-package com.brachium.book_tracking.google;
+package com.brachium.book_tracking.google.book;
 
 import com.brachium.book_tracking.book.Book;
 import lombok.AllArgsConstructor;

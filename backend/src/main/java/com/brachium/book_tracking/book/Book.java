@@ -10,6 +10,7 @@ import lombok.Data;
 public class Book {
 
     @Id
+    @GeneratedValue
     private int id;
 
     @Column(unique = true)

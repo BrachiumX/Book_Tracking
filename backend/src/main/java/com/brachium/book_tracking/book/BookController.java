@@ -1,7 +1,5 @@
-package com.brachium.book_tracking.controllers;
+package com.brachium.book_tracking.book;
 
-import com.brachium.book_tracking.book.Book;
-import com.brachium.book_tracking.book.BookRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RestController
 @RequestMapping(path="/data")
-public class DatabaseController {
+public class BookController {
 
   protected BookRepository bookRepository;
 

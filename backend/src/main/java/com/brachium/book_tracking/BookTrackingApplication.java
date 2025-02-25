@@ -1,11 +1,9 @@
-package com.brachium.book_tracking.main;
+package com.brachium.book_tracking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses = )
 public class BookTrackingApplication {
 
 	public static void main(String[] args) {
