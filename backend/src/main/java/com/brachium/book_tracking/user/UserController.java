@@ -1,5 +1,6 @@
 package com.brachium.book_tracking.user;
 
+import com.brachium.book_tracking.book.Book;
 import com.brachium.book_tracking.book.BookRepository;
 import com.brachium.book_tracking.library.LibraryStatus;
 import com.brachium.book_tracking.library.LibraryRelation;
@@ -15,6 +16,7 @@ public class UserController {
     private LibraryRelationRepository libraryRelationRepository;
     private UserRepository userRepository;
     private BookRepository bookRepository;
+    private UserLibrary userLibrary;
 
     @PostMapping
     public @ResponseBody String addUser(@RequestParam String name) {
@@ -22,14 +24,20 @@ public class UserController {
         return "Saved";
     }
 
-    @PostMapping(path="/book")
-    public @ResponseBody String addBook(@RequestParam int userId, @RequestParam int bookId) {
-        libraryRelationRepository.save(new LibraryRelation(0, bookId, userId, LibraryStatus.FINISHED, 0, 0));
-        return "Saved";
+    @GetMapping(path="/book")
+    public @ResponseBody Iterable<Book> getBookListOfUser(@RequestParam int userId) {
+        return libraryRelationRepository.getUserLibrary(userId);
     }
 
-    @GetMapping(path="/book")
-    public @ResponseBody Iterable<Integer> getBookListOfUser(@RequestParam int userId) {
-        return libraryRelationRepository.getUserLibrary(userId);
+    @GetMapping(path="/test")
+    public @ResponseBody String test(@RequestParam int userId, @RequestParam int bookId,
+                                     @RequestParam LibraryStatus status, @RequestParam int initialRating,
+                                     @RequestParam int endRating) {
+        String result = "";
+        result += userLibrary.addBookToUserLibrary(userId, bookId);
+        result += userLibrary.updateStatus(userId, bookId, status);
+        result += userLibrary.updateInitialRating(userId, bookId, initialRating);
+        result += userLibrary.updateEndRating(userId, bookId, endRating);
+        return result;
     }
 }

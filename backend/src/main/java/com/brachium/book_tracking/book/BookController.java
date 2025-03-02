@@ -1,14 +1,19 @@
 package com.brachium.book_tracking.book;
 
+import com.brachium.book_tracking.google.book.GoogleInteraction;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping(path="/data")
 public class BookController {
 
+  private final GoogleInteraction googleInteraction;
   protected BookRepository bookRepository;
 
   @GetMapping(path="/all")
@@ -102,6 +107,17 @@ public class BookController {
     private @ResponseBody String deleteById(int id) {
       bookRepository.deleteById(id);
       return "Entry deleted";
+    }
+
+    @PostMapping(path="/placeholder")
+    private @ResponseBody String addPlaceholderData() {
+      List<Book> list = new LinkedList<>();
+      for (int i = 0; i < 10; i++) {
+        list.addAll(googleInteraction.makeGoogleApiRequest("placeholder","","","",10,i));
+      }
+
+      bookRepository.saveAll(list);
+      return "Test data in place.";
     }
   }
 }
