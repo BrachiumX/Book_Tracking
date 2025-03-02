@@ -33,7 +33,7 @@ public class GoogleController {
                                                         @RequestParam(defaultValue = "") String authorParameter,
                                                         @RequestParam(defaultValue = "") String isbn,
                                                         @RequestParam(defaultValue = "10") int pageSize,
-                                                        @RequestParam(defaultValue = "0") int currentPage) throws InterruptedException {
+                                                        @RequestParam(defaultValue = "0") int currentPage) {
         return googleInteraction.makeGoogleApiRequest(query, titleParameter, authorParameter, isbn, Math.min(pageSize, sizeLimit) , currentPage);
     }
 }
