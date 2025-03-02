@@ -19,7 +19,7 @@ public class Book {
     private String author;
     private int publishedYear;
     private String publisher;
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "TEXT")
     private String description;
     @Column(unique = true)
     private String isbn13;
@@ -27,7 +27,7 @@ public class Book {
     private String isbn10;
     private int pageCount;
     private String category;
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "TEXT")
     private String imageLink;
     private String language;
 

@@ -85,6 +85,14 @@ public class GoogleBookList {
                 publishedYear = Integer.parseInt(this.volumeInfo.publishedDate.split("-")[0]);
             }
 
+            if (isbn10.isEmpty()) {
+                isbn10 = null;
+            }
+
+            if (isbn13.isEmpty()) {
+                isbn13 = null;
+            }
+
             return new Book(0,
                     this.id,
                     this.volumeInfo.title,
